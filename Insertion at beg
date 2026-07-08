@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+    }
+};
+
+Node*insertAtBeg(Node*head,int x){
+    
+    
+  Node*  newNode=new Node(x);
+  
+    newNode->next=head;
+    return newNode;
+}
+void displayList(Node*head){
+    Node*temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+int main() {
+	// your code goes here
+Node*head=new Node(9);
+head->next=new Node(8);
+head->next->next=new Node(7);
+
+head=insertAtBeg(head,10);
+displayList(head);
+return 0;
+}
