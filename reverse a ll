@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+     public :int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+    }
+};
+Node*reverse(Node*head){
+    Node*prevNode,*currNode,*nextNode;
+    prevNode=nullptr;
+    currNode=nextNode=head;
+    while(nextNode!=nullptr){
+        nextNode=nextNode->next;
+        currNode->next=prevNode;
+        prevNode=currNode;
+        currNode=nextNode;
+    }
+     return prevNode;
+}
+int main() {
+	// your code goes here
+Node*head=new Node(87);
+head->next =new Node(95);
+head->next->next=new Node(65);
+head->next->next->next=new Node(77);
+head=reverse(head);
+Node*temp;
+temp=head;
+while(temp!=nullptr){
+    cout<<temp->data<<" ";
+    temp=temp->next;
+}
+
+return 0;
+}
+
+  
