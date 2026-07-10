@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+   public: int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+    }
+    
+};
+void getLength(Node*head){
+    int count=0;
+    Node*temp;
+    temp=head;
+    while(temp!=nullptr){
+        count++;
+        temp=temp->next;
+    }
+    cout<<"length is "<<count;
+}
+int main() {
+	// your code goes here
+Node*head=new Node(3);
+head->next=new Node(4);
+head->next->next=new Node(9);
+head->next->next->next=new Node(4);
+getLength(head);
+return 0;
+}
