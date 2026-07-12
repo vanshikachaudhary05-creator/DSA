@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node* prev;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+Node* create() {
+    Node* head = nullptr;
+    Node* tail = nullptr;
+
+    int choice = 1;
+
+    while (choice == 1) {
+        int data;
+        cout << "Enter data: ";
+        cin >> data;
+
+        Node* newNode = new Node(data);
+
+        if (head == nullptr) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+
+        cout << "Enter 1 to continue, 0 to stop: ";
+        cin >> choice;
+    }
+
+    return head;
+}
+
+Node* insertAtBeg(Node* head, int data) {
+    Node* newNode = new Node(data);
+
+    if (head == nullptr) {
+        return newNode;
+    }
+
+    newNode->next = head;
+    head->prev = newNode;
+    head = newNode;
+
+    return head;
+}
+
+void display(Node* head) {
+    while (head != nullptr) {
+        cout << head->data << " ";
+        head = head->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    Node* head = create();
+
+    cout << "Original List: ";
+    display(head);
+
+    int value;
+    cout << "Enter value to insert at beginning: ";
+    cin >> value;
+
+    head = insertAtBeg(head, value);
+
+    cout << "Updated List: ";
+    display(head);
+
+    return 0;
+}
