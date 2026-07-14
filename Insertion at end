@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node*prev;
+    Node(int x){
+        data=x;
+        next=nullptr;
+        prev=nullptr;
+    }
+    };
+    Node*create(){
+        Node*head=nullptr;
+        Node*tail=nullptr;
+        int choice=1;
+        while(choice){
+            int data;
+            cout<<"enter data";
+            cin>>data;
+            Node*newNode=new Node(data);
+            if (head==nullptr)
+                head=newNode;
+                tail=newNode;
+            }
+            else{
+                tail->next=newNode;
+                newNode->prev=tail;
+                tail=newNode;
+            }
+            cout<<"enter choice(1/0):";
+            cin>>choice;
+        }
+        return head;
+    }
+    
+Node*insertAtEnd(Node*head,int data ){
+
+    Node*newNode=new Node(data);
+    if(head==nullptr){
+        return newNode;
+    }
+    Node*temp=head;
+    while(temp->next!=nullptr){
+        temp=temp->next;
+    }
+    temp->next=newNode;
+    newNode->prev=temp;
+    return head;
+}
+void display(Node*head){
+    Node*temp;
+    temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+int main(){
+    Node*head=create();
+    cout<<"original list:"<<" ";
+    display(head);
+    int value;
+    cout<<"enter value";
+    cin>>value;
+    head=insertAtEnd(head,value);
+    cout<<"updated list:"<<" ";
+    display(head);
+    return 0;
+}
