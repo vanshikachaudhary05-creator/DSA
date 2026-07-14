@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node *next;
+    Node *prev;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+        prev = nullptr;
+    }
+};
+
+// Create Doubly Linked List
+Node* create() {
+    Node *head = nullptr;
+    Node *tail = nullptr;
+    int choice = 1;
+
+    while (choice) {
+        int data;
+        cout << "Enter data: ";
+        cin >> data;
+
+        Node *newNode = new Node(data);
+
+        if (head == nullptr) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+
+        cout << "Do you want to continue (1/0): ";
+        cin >> choice;
+    }
+
+    return head;
+}
+
+// Insert at any position (1-based indexing)
+Node* insertAtPos(Node *head, int value, int pos) {
+
+    Node *newNode = new Node(value);
+
+    // Insert at beginning
+    if (pos == 1) {
+        newNode->next = head;
+        if (head != nullptr)
+            head->prev = newNode;
+        head = newNode;
+        return head;
+    }
+
+    Node *temp = head;
+
+    for (int i = 1; i < pos - 1 && temp != nullptr; i++) {
+        temp = temp->next;
+    }
+
+    if (temp == nullptr) {
+        cout << "Invalid Position" << endl;
+        delete newNode;
+        return head;
+    }
+
+    newNode->next = temp->next;
+    newNode->prev = temp;
+
+    if (temp->next != nullptr)
+        temp->next->prev = newNode;
+
+    temp->next = newNode;
+
+    return head;
+}
+
+// Display List
+void display(Node *head) {
+    Node *temp = head;
+
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+
+    Node *head = create();
+
+    cout << "Original List: ";
+    display(head);
+
+    int value, pos;
+
+    cout << "Enter value to insert: ";
+    cin >> value;
+
+    cout << "Enter position: ";
+    cin >> pos;
+
+    head = insertAtPos(head, value, pos);
+
+    cout << "Updated List: ";
+    display(head);
+
+    return 0;
+}
