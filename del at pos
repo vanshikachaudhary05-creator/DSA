@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+   public: int data;
+    Node*next;
+    Node*prev;
+    Node(int x){
+        data=x;
+        next=nullptr;
+        prev=nullptr;
+    }
+};
+Node*create(){
+    Node*head=nullptr;
+    Node*tail=nullptr;
+    int choice=1;
+    while(choice){
+        int data;
+        cout<<"enter data:";
+        cin>>data;
+        Node*newNode=new Node(data);
+            if(head==nullptr){
+                head=tail=newNode;
+            }
+            else{
+                tail->next=newNode;
+                newNode->prev=tail;
+                tail=newNode;
+            }
+            cout<<"want to continue(1/0):";
+            cin>>choice;
+        
+    }
+    return head;
+}
+Node*delAtPos(Node*head,int pos){
+   
+    if(head==nullptr){
+        cout<<"list is empty";
+        return head;
+    }
+    if(pos==1){
+        Node*temp;
+        temp=head;
+        if(head!=nullptr){
+            head->prev=nullptr;
+        }
+        delete temp;
+        return head;
+        
+    }
+     Node*temp=head;
+     for(int i=1;i<pos&&temp!=nullptr;i++){
+     
+         temp=temp->next;
+     }
+     if(temp==nullptr){
+         cout<<"invalid pos";
+         return head;
+     }
+    
+        temp->prev->next=temp->next;
+        temp->next->prev=temp->prev;        
+        delete temp;
+    
+    return head;
+}
+void display(Node*head){
+    Node*temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+int main() {
+	// your code goes here
+Node*head=create();
+cout<<"original list"<< " ";
+display(head);
+int pos;
+cin>>pos;
+head=delAtPos(head,pos);
+cout<<"updated list";
+display(head);
+return 0;
+}
