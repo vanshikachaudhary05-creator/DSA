@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node*prev;
+    Node(int x){
+        data=x;
+        next=nullptr;
+        prev=nullptr;
+    }
+};
+
+Node*create(Node*&tail){
+    Node*head=nullptr;
+    
+    int choice=1;
+    while(choice){
+        int data;
+        cout<<"enter data"  ;
+        cin>>data;
+        Node*newNode=new Node(data);
+        if(head==nullptr){
+            head=newNode;
+            tail=newNode;
+        }
+        else{
+            tail->next=newNode;
+            newNode->prev=tail;
+            tail=newNode;
+        }
+        cout<<"want to continue(1/0):";
+        cin>>choice;
+        }
+        return head;
+}
+Node*reverse(Node*head,Node*tail){
+    
+    if(head==nullptr){
+        cout<<"list is empty";
+    }
+    Node *curr = head;
+    Node *nextNode;
+    
+        
+        while(curr!=nullptr){
+        nextNode=curr->next;
+        curr->next=curr->prev;
+        curr->prev=nextNode;
+        curr=nextNode;
+    }
+    Node*temp=head;
+    head=tail;
+    tail=temp;
+
+return head;
+}
+void display(Node*head){
+    Node*temp=head;
+    while(temp!=nullptr){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+int main() {
+	// your code goes here
+Node*tail=nullptr;	
+Node*head=create(tail);
+cout<<"original list:";
+display(head);
+head=reverse(head,tail);
+cout<<"reverse list:";
+display(head);
+return 0;
+
+}
