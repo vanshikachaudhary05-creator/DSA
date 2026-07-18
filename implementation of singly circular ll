@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+        
+    }
+};
+Node*create(){
+    Node*head=nullptr;
+    Node*temp=head;
+    int choice=1;
+    while(choice){
+        int data;
+        cout<<"enter data";
+        cin>>data;
+        Node*newNode=new Node(data);
+        if(head==nullptr){
+            head=temp=newNode;
+        }
+        else{
+            temp->next=newNode;
+            temp=newNode;
+        }
+        temp->next=head;
+        cout<<"enter choice(1/0):";
+        cin>>choice;
+        
+    }
+    return head;
+}
+void display(Node*head){
+    if(head==nullptr){
+        cout<<"list is empty";
+    }
+    else{
+        Node*temp=head;
+        while(temp->next!=head){
+            cout<<temp->data;
+            temp=temp->next;
+        }
+        cout<<temp->data;
+    }
+    cout<<endl;
+}
+int main() {
+	// your code goes here
+Node*head=create();
+display(head);
+return 0;
+}
