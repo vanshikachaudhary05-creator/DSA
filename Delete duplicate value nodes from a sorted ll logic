@@ -1,0 +1,18 @@
+SinglyLinkedListNode* removeDuplicates(SinglyLinkedListNode* head) {
+    if (head == nullptr)
+        return head;
+
+    SinglyLinkedListNode* temp = head;
+
+    while (temp != nullptr && temp->next != nullptr) {
+        if (temp->data == temp->next->data) {
+            SinglyLinkedListNode* duplicate = temp->next;
+            temp->next = duplicate->next;
+            delete duplicate;   // Optional on HackerRank, but good practice
+        } else {
+            temp = temp->next;
+        }
+    }
+
+    return head;
+}
