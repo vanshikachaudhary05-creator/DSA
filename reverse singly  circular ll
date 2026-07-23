@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+    }
+};
+Node*create(){
+    Node*head=nullptr;
+    Node*tail=nullptr;
+    int choice=1;
+    while(choice){
+        int data;
+        cin>>data;
+        Node*newNode=new Node(data);
+        if(head==nullptr){
+            head=tail=newNode;
+        }
+        else{
+            tail->next=newNode;
+            tail=newNode;
+            tail->next=head;
+        }
+        cout<<"enter choice(1/0):";
+        cin>>choice;
+    }
+    return tail;
+}
+Node*reverse(Node*tail){
+   
+    if(tail==nullptr||tail->next==tail){
+        
+        return tail;
+    }
+    Node*head=tail->next;
+    Node*curr=head;
+   
+   
+    Node*prev=tail;
+    Node*nextNode;
+    do{
+        
+    
+    
+         nextNode=curr->next;
+        
+        curr->next=prev;
+        prev=curr;
+        curr=nextNode;
+    }
+    while(curr!=head);
+    tail=head;
+    return tail;
+    
+}
+void display(Node*tail){
+    if(tail==nullptr){
+        cout<<"list is empty";
+        return;
+    }
+    Node*temp=tail->next;
+    do{
+        cout<<temp->data;
+        temp=temp->next;
+    }
+    while(temp!=tail->next);
+    cout<<endl;
+}
+int main() {
+	// your code goes here
+Node*tail=create();
+display(tail);
+tail=reverse(tail);
+display(tail);
+return 0;
+}
