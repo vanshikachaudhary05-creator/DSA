@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node*prev;
+    Node(int x)
+{
+    data=x;
+    next=nullptr;
+    prev=nullptr;
+}
+    
+};
+Node*create(Node*&tail){
+    Node*head=nullptr;
+    int data;
+    while(cin>>data&&data!=-1){
+        Node*newNode=new Node(data);
+        if(head==nullptr){
+            head=tail=newNode;
+            head->next=head;
+            head->prev=head;
+        }
+        else{
+            tail->next=newNode;
+            newNode->prev=tail;
+            newNode->next=head;
+            head->prev=newNode;
+            tail=newNode;
+        }
+    }
+    return head;
+}
+Node*insertAtEnd(Node*head,Node*&tail){
+    int data;
+    cin>>data;
+     Node*newNode=new Node(data);
+    if(head==nullptr){
+        head=tail=newNode;
+        newNode->next=newNode;
+        newNode->prev=newNode;
+        
+    }
+    else{
+         
+          newNode->prev=tail;
+          tail->next=newNode;
+          newNode->next=head;
+          head->prev=newNode;
+          tail=newNode;
+    
+    
+    }
+    return head;
+}
+void display(Node*head){
+    if(head==nullptr){
+        cout<<"list is empty";
+        return ;
+    }
+        Node*temp=head;
+        do{
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        while(temp!=head);
+        cout<<endl;
+    }
+
+int main() {
+	// your code goes here
+Node*head=nullptr;
+Node*tail=nullptr;
+head=create(tail);
+display(head);
+head=insertAtEnd(head,tail);
+display(head);
+return 0;
+}
