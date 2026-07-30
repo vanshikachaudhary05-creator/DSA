@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node*prev;
+    Node(int x){
+        data=x;
+        next=nullptr;
+        prev=nullptr;
+    }
+};
+Node*create(Node*&tail){
+    Node*head=nullptr;
+    int data;
+    while(cin>>data&&data!=-1){
+        Node*newNode=new Node(data);
+        if(head==nullptr){
+            head=tail=newNode;
+            head->next=head;
+            head->prev=head;
+        }
+        else{
+            tail->next=newNode;
+            
+            newNode->prev=tail;
+            newNode->next=head;
+            head->prev=newNode;
+            tail=newNode;
+            
+        }
+    }
+    return head;
+}
+Node*delAtPos(Node*head,Node*&tail,int pos){
+    if(head==nullptr){
+        cout<<"List is empty\n";
+        return head ;
+    }
+    if(pos==1){
+        if(head->next==head){
+           
+            delete head;
+            head=tail=nullptr;
+        }
+        else{
+            Node*temp=head;
+            head=head->next;
+            head->prev=tail;
+            tail->next=head;
+            delete temp;
+        }
+        return head;
+    }
+    Node*temp=head;
+    int count=1;
+    while(count<pos&&temp->next!=head){
+        temp=temp->next;
+        count++;
+    }
+    if(count!=pos){
+    cout<<"invalid pos\n";
+    return head;
+    }
+    if(temp==tail){
+        tail=tail->prev;
+        tail->next=head;
+        head->prev=tail;
+        delete temp;
+    }
+    else{
+       temp->prev->next=temp->next;
+       temp->next->prev=temp->prev;
+        
+        delete temp;
+    }
+    return head;
+}
+void display(Node*head){
+    if(head==nullptr){
+        cout<<"List is empty\n";
+        return;
+    }
+        
+    
+        Node*temp=head;
+        do{
+            cout<<temp->data<<" ";
+            temp=temp->next;
+    }
+    while(temp!=head);
+        cout<<endl;
+    
+}
+int main() {
+	// your code goes here
+	Node*head=nullptr;
+	Node*tail=nullptr;
+head=create(tail);
+display(head);
+int pos;
+cin>>pos;
+head=delAtPos(head,tail,pos);
+display(head);
+return 0;
+}
