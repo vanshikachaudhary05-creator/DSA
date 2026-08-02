@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+    public:int data;
+    Node*link;
+    Node(int x){
+        data=x;
+        link=nullptr;
+    }
+};
+Node*top=nullptr;
+void push(int x){
+    
+    Node*newNode=new Node(x);
+    
+    newNode->link=top;
+    top=newNode;
+}
+void display(){
+    if(top==nullptr){
+        cout<<"stack is underflow";
+    }
+    else{
+        Node*temp=top;
+        while(temp!=nullptr){
+            cout<<temp->data<<" ";
+            temp=temp->link;
+        }
+        cout<<endl;
+    }
+    return;
+}
+void peek(){
+    if(top==nullptr){
+        cout<<"stack is underflow\n";
+        return;
+    }
+    else{
+        
+    
+    cout<<"the top most element is:"<<top->data<<endl;
+    }
+}
+void pop(){
+    if(top==nullptr){
+        cout<<"stack is underflow";
+    }
+    else{
+        Node*temp=top;
+        cout<<"the pop element is:"<<top->data<<endl;
+        top=top->link;
+        delete temp;
+    }
+}
+
+int main() {
+	// your code goes here
+push(10);
+push(3);
+push(2);
+display();
+peek();
+pop();
+peek();
+display();
+return 0;
+}
