@@ -1,0 +1,69 @@
+class MinStack {
+public:
+    stack<int> st;
+    stack<int> minSt;
+
+    MinStack() {
+    }
+
+    void push(int value) {
+        st.push(value);
+        if (minSt.empty() || value <= minSt.top())
+            minSt.push(value);
+    }
+
+    void pop() {
+        if (st.top() == minSt.top())
+            minSt.pop();
+        st.pop();
+    }
+
+    int top() {
+        return st.top();
+    }
+
+    int getMin() {
+        return minSt.top();
+    }
+};
+#include <bits/stdc++.h>
+using namespace std;
+class MaxStack{
+    public:
+    stack<int>st;
+    stack<int>maxst;
+
+MaxStack(){
+    
+}
+void push(int value){
+    st.push(value);
+    if(maxst.empty()||value>=maxst.top())
+    maxst.push(value);
+}
+void pop(){
+    if(st.top()==maxst.top()){
+        maxst.pop();
+    }
+        st.pop();
+    
+}
+int top(){
+    return st.top();
+}
+int getMax(){
+    return maxst.top();
+}
+};
+int main() {
+	// your code goes here
+MaxStack obj;
+obj.push(-2);
+obj.push(0);
+obj.push(-3);
+obj.push(5);
+cout<<obj.getMax()<<endl;
+obj.pop();
+cout<<obj.top()<<endl;
+cout<<obj.getMax()<<endl;
+return 0;
