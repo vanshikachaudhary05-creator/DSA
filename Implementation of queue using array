@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define N 5
+using namespace std;
+int myQueue[N] ; 
+int front=-1;
+int rear=-1;
+void enqueue(int x){
+    if(rear==N-1){
+        cout<<"overflow"<<endl;
+    }
+    else if(front==-1&&rear==-1){
+        front=rear=0;
+        myQueue[rear]=x;
+    }
+    else{
+        rear++;
+        myQueue[rear]=x;
+    }
+}
+void dequeue(){
+    if(front==-1&&rear==-1){
+        cout<<"underflow"<<endl;
+    }
+    else if(front==rear){
+        front=rear=-1;
+    }
+    else{
+        cout<<myQueue[front]<<endl;
+        front++;
+    }
+}
+void display(){
+    if(front==-1&&rear==-1){
+        cout<<"empty"<<endl;
+        
+    }
+    else{
+        for(int i=front;i<rear+1;i++){
+            cout<<myQueue[i]<<endl;
+        }
+    }
+}
+void peek(){
+    if(front==-1&&rear==-1){
+        cout<<"underflow"<<endl;
+    }
+    else{
+    cout<<myQueue[front]<<endl;
+    }
+}
+
+int main() {
+	// your code goes here
+enqueue(2);
+enqueue(5);
+enqueue(-1);
+display();
+peek();
+dequeue();
+peek();
+display();
+return 0;
+}
