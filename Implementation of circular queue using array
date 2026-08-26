@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#define N 5
+using namespace std;
+int myQueue[N];
+int front=-1;
+int rear=-1;
+void enqueue(int x){
+    if(front==-1&&rear==-1){
+        front=rear=0;
+        myQueue[rear]=x;
+        
+    }
+    else if((rear+1)%N== front){
+        cout<<"full"<<endl;
+    }
+    else{
+        rear=(rear+1)%N;
+        myQueue[rear]=x;
+    }
+    }
+void dequeue(){
+    if(front==-1&&rear==-1){
+        cout<<"empty"<<endl;
+}
+else if(front==rear)
+{
+    cout<<myQueue[front]<<endl;
+    front=rear=-1;
+}
+else{
+    cout<<myQueue[front]<<endl;
+    front=(front+1)%N;
+   
+}
+}
+void display(){
+     if(front==-1&&rear==-1){
+        cout<<"empty"<<endl;
+}
+
+    int i=front;
+    while(i!=rear){
+        cout<<myQueue[i]<<" ";
+        i=(i+1)%N;
+    
+}
+cout<<myQueue[rear];
+}
+
+int main() {
+	// your code goes here
+enqueue(2);
+enqueue(-1);
+enqueue(5);
+enqueue(6);
+enqueue(7);
+display();
+dequeue();
+return 0;
+
+
+}
