@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:int data;
+    Node*next;
+    Node(int x){
+        data=x;
+        next=nullptr;
+    }
+};
+Node*front=nullptr;
+Node*rear=nullptr;
+void enqueue(int x){
+    Node*newNode=new Node(x);
+    newNode->data=x;
+    newNode->next=nullptr;
+    if(rear==nullptr){
+        front=rear=newNode;
+        rear->next=front;
+    }
+    else{
+        rear->next=newNode;
+        rear=newNode;
+        rear->next=front;
+    }
+}
+void dequeue(){
+    if(front==nullptr&&rear==nullptr){
+        cout<<"empty"<<endl;
+    }
+    
+        
+    else if(front==rear){
+        Node*temp=front;
+        front=rear=nullptr;
+        delete temp;
+    }
+    else{
+        Node*temp=front;
+        front=front->next;
+        rear->next=front;
+        delete temp;
+    }
+}
+void peek(){
+    if(front==nullptr&&rear==nullptr){
+        cout<<"empty"<<endl;
+    }
+    else{
+        cout<<front->data<<endl;
+    }
+}
+void display(){
+    if(front==nullptr&&rear==nullptr){
+        cout<<"empty"<<endl;
+    }
+    else{
+        Node*temp=front;
+        while(temp->next!=front){
+            cout<<temp->data<<endl;
+            temp=temp->next;
+        }
+        cout<<temp->data<<endl;
+    }
+}
+int main() {
+	// your code goes here
+enqueue(2);
+enqueue(-1);
+enqueue(5);
+display();
+dequeue();
+peek();
+return 0;
+}
