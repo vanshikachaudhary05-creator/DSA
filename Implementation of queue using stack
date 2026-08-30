@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+#define N 5
+
+using namespace std;
+int s1[N],s2[N];
+int top1=-1,top2=-1;
+int cnt=0;
+
+void push1(int data){
+    if(top1==N-1){
+        cout<<"full"<<endl;
+    }
+    else{
+        top1++;
+        s1[top1]=data;
+    }
+}
+void enqueue(int x){
+    if(top1==N-1){
+        cout<<"full"<<endl;
+        
+    }
+    else{
+    push1(x);
+    cnt++;
+    }
+}
+int pop1(){
+    if(top1==-1){
+        cout<<"empty"<<endl;
+        return -1;
+    }
+    return s1[top1--];
+}
+int pop2(){
+    if(top2==-1){
+        cout<<"empty"<<endl;
+        return -1;
+    }
+    return s2[top2--];
+}
+void push2(int data){
+    if(top2==N-1){
+        cout<<"full"<<endl;
+    }
+    else{
+        top2++;
+        s2[top2]=data;
+    }
+}
+void dequeue(){
+    int a,b;
+    if(cnt==0){
+        cout<<"empty"<<endl;
+    }
+    else{
+        for(int i=0;i<cnt;i++){
+            a=pop1();
+            push2(a);
+        }
+        b=pop2();
+        cout<<b;
+        cnt--;
+        for(int i=0;i<cnt;i++){
+            a=pop2();
+            push1(a);
+        }
+        
+    }
+}
+void display(){
+    if(cnt==0)
+    {
+        cout<<"empty"<<endl;
+        return;
+    }
+    for(int i=0;i<=top1;i++){
+        cout<<s1[i]<<" "<<endl;
+    }
+}
+int main() {
+	// your code goes here
+enqueue(5);
+enqueue(2);
+enqueue(-1);
+dequeue();
+enqueue(7);
+display();
+return 0;
+}
